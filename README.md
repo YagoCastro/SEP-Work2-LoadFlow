@@ -77,10 +77,12 @@
 
 Foi Utilizado para o desenvolvimento e edição colaborativa do relatório em LaTeX, facilitando a criação do documento no formato científico e técnico e com formatação precisa. Sua interface online permite que até 2  usuários trabalhem simultaneamente no mesmo documento, e oferece uma visualização instantânea do resultado final em PDF.
 
+### Bibliografia
+[1] SILVEIRA, Lucas Melo. Aula 08: Fluxo de Carga. Análise de Sistemas Elétricos de Potência. UFC, set de 2024. Slides.
 
+[3] GLOVER, J. Duncan; SARMA, Mulukutla S. Power System Analysis and Design. 6th ed. Boston: Cengage Learning, 2016.
 
-
-
+[4] VERA, Santiago Peñate. GridCal’s documentation. 2024. Disponível em: https://gridcal.readthedocs.io/en/latest/. Acesso em: 13 fev. 2024.
 
 </div>
 
