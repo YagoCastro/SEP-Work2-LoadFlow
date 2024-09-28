@@ -5,8 +5,8 @@
 
 ## Departamento de Engenharia Elétrica
 
-### Trabalho Computacional 1
-### Cálculos de Curtos Circuitos
+### Trabalho Computacional 2
+### Fluxo de Carga
 
 </div>
 
