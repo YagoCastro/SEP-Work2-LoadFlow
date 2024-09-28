@@ -1,0 +1,139 @@
+% Introdução do Trabalho ASP-2 - Análise de SEP
+%
+\setlength{\parindent}{1cm} % Define o recuo dos parágrafos
+
+\section{Introdução}
+
+O fluxo de potência ou fluxo de carga é o estudo, na condição de regime permanente, de um sistema elétrico de potência, no qual se verifica o estado de operação de uma rede elétrica com os seus caminhos sinalizados por suas grandezas de potência, ativa e reativa, tensão e ângulo de fase nos elementos do sistema.
+
+No estudo de fluxo de carga, essas grandezas são essenciais para entender o comportamento de uma rede que esteja operando com surto de tensão ou sobrecarga. Um operador, portanto, precisa entender o que está ocorrendo em segundos como uma grande rede complexa está se comportando ao longo das linhas, nos transformadores, nos geradores e em suas barras para tomar uma decisão precisa e acertiva.
+
+Dessarte, para a visualização da problemática em redes complexas, compreendendo milhares de barras, faz-se necessário a utilização de um software capaz de computar todos os cálculos por meio de métodos matemáticos que apresentem as variáveis de potência, tensão e ângulo de fase.
+
+\subsection{GridCal}
+
+Diante da problemática enfrentada, surge o software \emph{GridCal}, uma ferramenta capaz de informar ao usuário como se comporta, em regime estacionário, cada um dos elementos da rede sob a óptica de fluxo de carga, como também dos problemas relacionados com curto-circuito da rede.
+
+A versão utilizada para esse trabalho será a versão 5.1.0, conforme mostrado na Fig.(\ref{fig:gridcal-5.1.0}).  
+
+\begin{figure}[H]
+    \centering
+    \caption{Tela inicial do GridCal.}
+    \begin{center}
+        \includegraphics[scale=0.42]{imagens/introdução/gridcal/GridCal.png} \newline
+    \end{center}
+    \label{fig:gridcal-5.1.0}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+O software possui a capacidade de solucionar o fluxo de potência por meio de algorítmos de análise numérica, dentre eles: \emph{Newton-Raphson}, \emph{Gauss-Seidel}, \emph{Desacoplado rápido} e \emph{Linear AC/DC}.
+
+Os métodos numéricos e a quantidade de iterações realizadas para os problemas propostos são mostrados na Fig.(\ref{fig:gridcal-metodos}).
+
+\begin{figure}[H]
+    \centering
+    \caption{Métodos de Solução Númerica do GridCal.}
+    \begin{center}
+        \includegraphics[scale=0.8]{imagens/introdução/gridcal/Metodos - Gridcal.png} \newline
+    \end{center}
+    \label{fig:gridcal-metodos}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\subsection{Problema Proposto}
+
+Este trabalho tem como objetivo fundamental solucionar a problémática proposta pelo professor Lucas Silveira Melo, com o seguinte caso.
+
+\begin{enumerate}
+
+    % ------------- Questão 1 ------------- %
+    \item  \textbf{Com base nos dados mostrados na figura abaixo e utilizando a interface gráfica do software GridCal, execute o fluxo de carga para esse sistema utilizando os seguintes métodos}:
+    
+    \begin{enumerate}
+        \item Gauss-Seidel;
+        \item Newton-Raphson;
+        \item Desacoplado Rápido;
+        \item Linear DC/AC;
+    \end{enumerate}
+    
+    Utilizando os prints na tela e a aba de resultados do software, exiba os resultados obtidos, comente sobre eles e utilizando o método de Newton-Raphson como base, compare os resultados.
+
+    \begin{figure}[H]
+        \centering
+        \caption{Dados de entrada das barras para implementação da rede proposta no GridCal.}
+        \begin{center}
+            \includegraphics[scale=0.8]{imagens/introdução/problema/dados_entrada_1.png} \newline
+        \end{center}
+        \label{fig:dados-entrada1}
+        {\footnotesize Fonte: Trabalho Computacional (ASP-Work-2) - 2024.1.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \caption{Dados de entrada das linhas para implementação da rede proposta no GridCal.}
+        \begin{center}
+            \includegraphics[scale=0.8]{imagens/introdução/problema/dados_entrada_2.png} \newline
+        \end{center}
+        \label{fig:dados-entrada2}
+        {\footnotesize Fonte: Trabalho Computacional (ASP-Work-2) - 2024.1.}
+    \end{figure}
+
+    É pedido para desconsiderar a coluna de Line Cha. para os dados de Branch, além de definir a potência nominal de todos os elementos da rede como 100MVA. \newpage
+
+    % ------------- Questão 2 ------------- %
+    \item \textbf{Utilizando somente o algoritmo de Newton-Raphson realize um estudo nesse sistema aumentando as cargas de um fator de 25 \%. Qual o efeito sobre o sistema? No caso de violação das restrições da rede elétrica, quais as possibilidades para solucionar os problemas encontrados?}
+    
+    Lembrando que os limites impostos para esse sistema são de que as linhas não podem atingir a capacidade máxima estabelecida e a tensão deve ficar dentro da faixa de 0,95 e 1,05 pu em todas as barras.
+
+    \begin{figure}[H]
+        \centering
+        \caption{Modelo esperado da rede.}
+        \begin{center}
+            \includegraphics[scale=0.8]{imagens/introdução/problema/Diagrama_SEP.png} \newline
+        \end{center}
+        \label{fig:diagrama-SEP}
+        {\footnotesize Fonte: Trabalho Computacional (ASP-Work-2) - 2024.1.}
+    \end{figure}
+    
+\end{enumerate}
+
+Deve-se levar em consideração que o diagrama mostrado na Fig.(\ref{fig:diagrama-SEP}) é apenas uma ilustração para a forma como deverá ser montado a rede que será estudada. Isto é, desconsidera-se os valores mostrados, como também as cores retratadas em cada elemento.
+
+\newpage
+\subsection{Propostas de Solução}
+
+Com respeito ao item 2 do trabalho, as propostas a que se fazem presentes nesse documento, dizem respeito ao sistema elétrico apresentado na Fig.(\ref{fig:rede-sem-fator}) após o aumento da carga.
+
+\begin{figure}[H]
+    \centering
+    \caption{Diagrama do sistema elétrico no GridCal sem o fator excedente de carga.}
+    \begin{center}
+        \includegraphics[scale=0.75]{imagens/introdução/proposição/Problema-GridCal.png} \newline
+    \end{center}
+    \label{fig:rede-sem-fator}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+Como pode ser observado na Fig.(\ref{fig:rede-sem-fator}), ainda que inicialmente, há um excesso de potência na linha de transmissão entre as barras 5 e 7, bem como no fluxo de carga dos transformadores, que ocasionaria na sobrecarga da rede pelas gerações de todos os geradores.
+
+Com o aumento das cargas em um fator de 25\%, pode-se notar, a partir da Fig.(\ref{fig:rede-com-fator}) que o excedente de carga levará a uma sobrecarga maior de algumas partes da rede. Percebe-se então que essa complicação na rede deve resultar em uma suavização do fluxo de carga.
+
+\begin{figure}[H]
+    \centering
+    \caption{Diagrama do sistema elétrico no GridCal com o fator excedente de carga.}
+    \begin{center}
+        \includegraphics[scale=0.75]{imagens/introdução/proposição/Sobrecarga - GridCal.png} \newline
+    \end{center}
+    \label{fig:rede-com-fator}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+De forma a eliminar esse mal da rede, deve-se estudar algumas possibilidades para atenuar essa problemática. Com isso, os integrantes da equipe se prontificaram a atender a essa demanda, supondo cenários que sejam os mais próximos da aplicação na realidade, levando em consideração a questão técnica, financeira e ambiental.
+
+Os cenários objetivados para essa resolução são:
+
+\begin{enumerate}[$\bullet$]
+    \item Dividir o fluxo de um dos geradores com a inserção de um segundo transformador na mesma barrra.
+    \item Aumentar a geração de um dos geradores com a substituição desse equipamento.
+    \item Colocar um banco de capacitores para reduzir a influência das cargas motrizes.
+\end{enumerate}

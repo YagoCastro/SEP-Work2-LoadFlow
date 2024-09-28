@@ -1,0 +1,36 @@
+\documentclass[a4papper,12pt]{article}[abntex2]
+
+\input{cabeca_test}
+
+\usepackage{ragged2e} % Pacote para usar \justify
+%\setlength{\parskip}{1cm} % Define o espaço entre parágrafos para 1 cm
+\setlength{\parindent}{4cm} % Define o recuo dos parágrafos
+
+\begin{document}
+
+\input{partes do relatório/capa}
+
+\thispagestyle{empty}
+\tableofcontents % Adciona o Sumário
+
+\newpage
+\input{partes do relatório/objetivos}
+\newpage
+\input{partes do relatório/introdução}
+\newpage
+\input{partes do relatório/material}
+\newpage
+\input{partes do relatório/desenvolvimento}
+\newpage
+\input{partes do relatório/conclusão}
+
+
+
+\thispagestyle{empty}
+\begin{center}
+    \bibliography{Bibliografia}
+\end{center}
+%\renewcommand\bibname{Bibliografia} 
+% comando para renomear o nome "Referências"
+
+\end{document}

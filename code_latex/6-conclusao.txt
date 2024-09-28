@@ -1,0 +1,21 @@
+% Conclusão do Trabalho ASP-2 - Análise de SEP
+%
+\section{\textbf{Conclusão}}
+
+A conclusão deste estudo se fundamenta em duas fases fundamentais: A comparação dos métodos de solução de fluxo de potência e a implementação de soluções para atenuar os problemas de sobrecarga e subtensão causados por um aumento de 25\% nas cargas do sistema.
+
+Na etapa inicial, os métodos Newton-Raphson, Gauss-Seidel, Desacoplado Rápido, Linear AC e Linear DC foram aplicados no programa GridCal. O Newton-Raphson sobressaiu-se pela sua elevada precisão e convergência rápida, sendo perfeito para sistemas de grande escala. Por outro lado, o Gauss-Seidel apresentou uma convergência mais lenta, porém com menor exigência computacional, sendo apropriado para sistemas de menor escala. O Desacoplado Rápido demonstrou eficiência tanto em velocidade quanto em simplicidade, conciliando precisão e performance. Os métodos Lineares AC e DC demonstraram maior velocidade, porém com menor exatidão, sendo eficazes em análises iniciais.
+
+Por conseguinte, tendo como base o estudo de análise comparativa realizado no subtópico apresentado na questão 1, podemos destacar que, considerando como referência o método de Newton-Raphson, os métodos de Gauss-Seidel e Desacoplado Rápido apresentaram um comportamento muito semelhante em todos os parâmetros ao método de Newton-Raphson, indicando que todos esses são métodos viáveis para analisar esse sistema. Por outro lado, os métodos Linear AC e DC apresentaram muitas divergências e, em alguns parâmetros, valores muito distantes do valor de referência, portanto, não são métodos viáveis para realizar o fluxo de carga e a análise do sistema.
+
+Após aumentar as cargas em 25\%, três soluções foram testadas para atenuar a sobrecarga e a subtensão:
+
+\begin{enumerate}[$\bullet$]
+    \item Transformadores paralelos e linhas novas: Esta abordagem provou ser eficiente e econômica, reduzindo a sobrecarga e aprimorando a tensão sem uma grande complexidade.
+    
+    \item O novo gerador, apesar de eficiente, enfrentou obstáculos como a sincronização com a rede, custos operacionais elevados e complexidade na integração.
+    
+    \item Transformadores em série e banco de capacitores: Essa estratégia se mostrou eficaz para balancear o sistema, diminuindo a potência reativa e aprimorando a tensão, além de ser mais econômica do que a inclusão de geradores.
+\end{enumerate}
+
+Em resumo, a solução que utiliza trafos paralelos e banco de capacitores se mostrou a mais equilibrada em termos de custo e eficiência, enquanto a utilização de geradores se mostrou a mais intrincada e custosa. A seleção da solução mais adequada depende das exigências particulares do sistema, porém, de maneira geral, a combinação de transformadores e capacitores é mais benéfica na maioria das situações.

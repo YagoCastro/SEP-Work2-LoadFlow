@@ -1,0 +1,8 @@
+% Material do Trabalho ASP-2 - Análise de SEP
+%
+\section{\textbf{Materiais}}
+\begin{itemize}
+    \item Software GridCal - Versão 5.1.0.
+    \item GitHub.
+    \item Overleaf/LaTeX.
+\end{itemize}

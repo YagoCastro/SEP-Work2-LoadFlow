@@ -1,0 +1,1161 @@
+% Procedimentos do Trabalho ASP-2 - Análise de SEP
+%
+
+\section{\textbf{Desenvolvimento}}
+
+\subsection{Solução - Questão 1}
+
+A solução da questão foi dividida em três partes, para atender a todos os resultados solicitados no enunciado da questão apresentados na introdução desse trabalho. Essas partes são:
+
+\begin{enumerate}
+    \item \textbf{Configurações do Sistema:} Serão apresentadas todas as configurações dos parâmetros para cada elemento e o trecho do sistema.
+    
+    \item \textbf{Métodos:} Elas têm o objetivo de apresentar os resultados encontrados na aplicação do método. Esses resultados serão apresentados em três imagens: a primeira mostra o diagrama da rede (para fazer uma análise visual do comportamento da rede), a segunda apresenta os dados obtidos para as barras e a terceira, os dados obtidos para as linhas.
+    
+   \item \textbf{Análise Comparativa:} Esta subseção destina-se a fazer uma breve análise comparativa dos dados obtidos nas subseções anteriores. Serão reunidos os mesmos parâmetros de métodos diferentes em uma mesma tabela para realizar uma análise comparativa da maioria dos parâmetros, com base nos valores obtidos pelo método de Newton-Raphson, conforme estabelecido no enunciado da questão, além de uma análise gráfica utilizando para o desenvolvimento dos gráficos o Python.
+\end{enumerate}
+
+\newpage
+\subsubsection{Configurações do Sistema}
+
+\begin{itemize}
+    \item \textbf{Parâmetros de configuração para as barras.} 
+% ================== Parâmetros de configuração para as barras ================= 
+\\
+\justifying{Inicialmente, será apresentada a construção do sistema, começando pela apresentação dos parâmetros adotados nas barras, onde tivemos como principais modificações os seguintes atributos: name, $is_slack$ igual a True para a barra 1, a tensão nominal ($V_{nom}$) [kV], o valor mínimo de tensão na barra ($V_{min}$) [p.u.] e o valor máximo de tensão na barra ($V_{max}$).}. Os valores de tensão nominal foram atribuídos com base na imagem de referência localizada na questão 2 do arquivo de detalhamento da atividade.
+
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para a barra 1.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/barras/bus1_config.png}
+    \end{center}
+    \label{fig:config_barra1}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+    \centering 
+    \caption{Parâmetros de configuração para a barra 2.}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{imagens/desenvolvimento/config_sist/barras/bus2_config.png}\end{center}
+    \label{fig:config_barra2}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering 
+    \caption{Parâmetros de configuração para a barra 3.}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{imagens/desenvolvimento/config_sist/barras/bus3_config.png}
+        \end{center}
+    \label{fig:config_barra3}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para a barra 4.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/barras/bus4_config.png}\end{center}
+    \label{fig:config_barra4}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para a barra 5.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/barras/bus5_config.png}
+        \end{center}
+    \label{fig:config_barra5}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para a barra 6.}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{imagens/desenvolvimento/config_sist/barras/bus6_config.png}
+    \end{center}
+    \label{fig:config_barra6}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para a barra 7.}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{imagens/desenvolvimento/config_sist/barras/bus7_config.png}
+    \end{center}
+    \label{fig:config_barra7}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para a barra 8.}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{imagens/desenvolvimento/config_sist/barras/bus8_config.png}
+        \end{center}
+    \label{fig:config_barra8}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering 
+    \caption{Parâmetros de configuração para a barra 9.}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{imagens/desenvolvimento/config_sist/barras/bus9_config.png}
+    \end{center}
+    \label{fig:config_barra9}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+% ================== Parâmetros de configuração para os geradores=================
+
+    \item \textbf{Parâmetros de configuração para os geradores.}
+\\
+Passados agora para a configuração dos geradores do sistema. A rede possui três geradores localizados nas barras 1, 2 e 3. Os principais parâmetros que foram modificiados: name, Pf, $V_Set$ [p.u.], $S_nom [MVA]$, P [MW].
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o gerador 1 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/geradores/gen1.png}
+    \end{center}
+    \label{fig:gen1}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o gerador 2 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/geradores/gen2.png} 
+    \end{center}
+    \label{fig:gen2}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o gerador 3 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/geradores/gen3.png}
+    \end{center}
+    \label{fig:gen3}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+
+\newpage
+% ================== Parâmetros de configuração para as cargas=================
+
+    \item \textbf{Parâmetros de configuração para as cargas.}
+
+Configurando agora as cargas presentes no sistema. Para a configuração desses elementos os principais atributos modificados foram: name, potência ativa (P) [MW], potência reativa (Q) [MVAr]. Abaixo apresentamos o cálculo realizado para obtenção desses valores nas devidas unidades, considerando o valor de base igual a 100 [MVA] e os valores da Fig.(\ref{fig:dados-entrada1}) que estão em [p.u.]:
+
+\textbf{Considerando:}
+
+$$P_{load-n} = P_{bus-load}^{n} \cdot P_{base} [MW] (1)$$
+
+$$Q_{load-n} = Q_{bus-load}^{n} \cdot Q_{base} [MVAr] (2)$$
+
+\textbf{Para a carga na barra 5:}
+
+$$P_{load-5} = 1,250 \cdot 100 [MW] \rightarrow P_{load-5} = 125 [MW]$$
+$$Q_{load-5} = 50 \cdot 100    [MVAr] \rightarrow Q_{load-5} = 50  [MVAr]$$
+
+\textbf{Para a carga na barra 6:}
+
+$$P_{load-6} = 0,90 \cdot 100 [MW]  \rightarrow P_{load-6} = 90 [MW]$$
+$$Q_{load-6} = 0,30 \cdot 100 [MVAr]  \rightarrow Q_{load-6} = 30 [MVAr]$$
+
+\textbf{Para a carga na barra 8:}
+
+$$P_{load-8} = 1,00 \cdot 100 [MW] \rightarrow P_{load-8} = 100  [MW]$$
+$$Q_{load-8} = 0,35 \cdot 100 [MVAr] \rightarrow Q_{load-8} = 35 [MVAr]$$
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para as cargas do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/cargas/loads_config.png}
+    \end{center}
+    \label{fig:config_loads}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+% ================== TRANSFORMADORES =================
+% ================== Parâmetros de configuração para as transformadores=================
+
+    \item \textbf{ Parâmetros de configuração para os transformadores.}
+
+ \begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o transformador 1 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/transformadores/config_transformador1.png}
+    \end{center}
+    \label{fig:trafo1}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+ \begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o transformador 2 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/transformadores/config_transformador2.png}
+    \end{center}
+    \label{fig:trafo2}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}  
+
+ \begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o transformador 3 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/transformadores/config_transformador3.png}
+    \end{center}
+    \label{fig:trafo3}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}  
+
+
+\newpage
+% ================== LINHAS =================
+% ================== Parâmetros de configuração para as linhas =================
+
+    \item \textbf{Parâmetros de configuração para as linhas.}
+
+ \begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o trecho de linha da barra 4 para a barra 6 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/linhas/line_4_6.png}
+    \end{center}
+    \label{fig:tline_4_6}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}  
+
+ \begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o trecho de linha da barra 6 para a barra 9 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/linhas/line_6-9.png}
+    \end{center}
+    \label{fig:tline_6_9}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}  
+
+
+ \begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o trecho de linha da barra 9 para a barra 8 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/linhas/line_9-8.png}
+    \end{center}
+    \label{fig:tline_9_8}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}  
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o trecho de linha da barra 8 para a barra 7 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/linhas/line_8_7.png}
+    \end{center}
+    \label{fig:tline_8_7}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}  
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o trecho de linha da barra 7 para a barra 5 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/linhas/line_7_5.png}
+    \end{center}
+    \label{fig:tline_7_5}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}  
+
+\begin{figure}[H]
+    \centering
+    \caption{Parâmetros de configuração para o trecho de linha da barra 5 para a barra 4 do sistema.}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/config_sist/linhas/line_5_4.png}
+    \end{center}
+    \label{fig:tline_5_4}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure} 
+
+\newpage
+% ================== MONTAGEM FINAL =================
+    \item \textbf{Montagem Final}
+
+A montagem final do sistema é mostrada na Fig.(\ref{fig:sist_complet}), a montagem foi realizada conforme os parâmetros fornecidos na questão estabelecidos e apresentados nas figura X e Y, e a configuração todos os elementos conforme foi apresentado.
+
+\begin{figure}[H]
+    \centering 
+    \caption{Montagem completa do sistema.}
+    \begin{center}
+        \includegraphics[width=1\textwidth]{imagens/desenvolvimento/config_sist/sistema_completo.PNG}
+    \end{center}
+    \label{fig:sist_complet}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+Com o sistema montado e devidamente configurado, vamos partir agora para a aplicação dos algoritmos de fluxo de carga utilizando o software GridCal. Ele fornece a análise do fluxo de carga com os seguintes algoritmos listados abaixo, e vamos aplicar e verificar alguns deles que estão destacados:
+
+\begin{itemize}
+    \item \textbf{\textcolor{blue}{Newton-Raphson in power:}}
+    \item Newton-Raphson in current:
+    \item Newton-Raphson-Iwamoto:
+    \item \textbf{\textcolor{blue}{Gauss-Seidel}}
+    \item Levenberg-Marquardt:
+    \item \textbf{\textcolor{blue}{Fast-Decoupled:}}
+    \item Holomorphic-Embedding:
+    \item \textbf{\textcolor{blue}{Linear AC approximation:}}
+    \item \textbf{\textcolor{blue}{DC approximation:}}
+\end{itemize}
+
+Um fato interessante que o autor do GridCal destaca é a opção de diferentes algoritmos numéricos que podem ser mais adequados para determinadas configurações da rede. Conforme foi destacado como algoritmo de referência no detalhamento da atividade, a documentação também menciona que, em geral, a implementação do método de Newton-Raphson no GridCal inclui retrocesso e outras inovações que o tornam um método muito competitivo a ser considerado por padrão.
+
+É importante também ressaltar que a precisão dos solucionadores numéricos dependem da magnitude das injeções de potência. Como estamos injetando potências na ordem de centenas de MW, a precisão pode ser de $10^{-3}$.
+
+Para a análise do estado do sistema em cada ponto, com base na potência no trecho e na análise visual que o software apresenta, vamos considerar o seguinte índice de cores:
+
+\begin{itemize}
+    \item verde: Estado Normal e Estável
+    \item amarelo: Atenção; condições limítrofes.
+    \item laranja: Sinal de alerta; risco de subtensão ou sobrecarga.
+    \item vermelho: Crítico; intervenção imediata necessária.
+\end{itemize}
+
+Consideramos as seguintes siglas para cada método:
+
+\begin{itemize}
+    \item NR: Newton Raphson.
+    \item GS: Gauss-Seidel.
+    \item DR: Desacoplado rápido.
+    \item AC: Linear AC.
+    \item DC: Linear DC.
+\end{itemize}
+
+\end{itemize}
+\newpage
+\subsubsection{item A - Newton Raphson}
+
+% ================== DIAGRAMA A - NR=================
+\begin{figure}[H]
+    \centering
+    \caption{Diagrama do sistema para a aplicação do método de Newton Raphson.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1A/diagrama_NR.PNG}
+    \end{center}
+    \label{fig:Diagrama_NR}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+No diagrama do sistema, quando aplicado o método de Newton-Raphson, podemos identificar visualmente trechos do sistema que apresentam sobretensões. Esses são: o transformador entre a barra 1 e a barra 4 e o transformador entre as barras 2 e 7.
+
+Além disso, os dois pontos destacados em laranja também indicam um sinal de alerta. Esses são: o transformador entre as barras 3 e 9 e a linha entre as barras 7 e 5. Esses trechos possivelmente serão objeto de análise na questão 2, quando aumentarmos a potência das cargas em 25\%.
+
+
+% ================== RESULT BUS - NR=================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as barras considerando o método de Newton Raphson.}
+    \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1A/result_bus_NR.PNG}  
+    %\caption{}
+    \label{fig:result_bus_NR}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+% ================== RESULT BRANCH - NR =====================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as linhas considerando o método de Newton Raphson.}
+    \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1A/result_branch_NR.png}  
+    %\caption{}
+    \label{fig:result_branch_NR}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+Nas figuras acima, são destacados os resultados nas buses (barras) e nas branches (linhas). Já podemos ressaltar que este é um bom resultado comparativo, com base nos valores de tensão nas barras, pois o método de Newton-Raphson conseguiu manter as tensões em todas as barras dentro dos limites propostos.
+
+Outro ponto a ser destacado é que as potências estão apresentando indicações corretas: valores positivos nas barras que possuem geradores, negativos nas barras que têm carga e zero indicando que aquela barra não apresenta carga ou geração. Considerando que este é um método com alta precisão e que garante um resultado rápido, os valores apresentados servirão como referência para a subseção de análise comparativa.
+
+\newpage
+\subsubsection{item B - Gauss-Seidel} 
+
+% ================== DIAGRAMA B - GS =====================
+\begin{figure}[H]
+    \centering
+     \caption{Diagrama do sistema para a aplicação do método de Gauss-Seidel.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1B/diagrama_GS.PNG}
+    \end{center}
+    %\caption{}
+    \label{fig:diagrama_GS}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+% ================== RESULT BUS - GS =====================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as barras considerando o método de Gauss-Seidel.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1B/result_bus_GS.PNG}
+    \end{center}
+    %\caption{}
+    \label{fig:result_bus_GS}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+% ================== RESULT BRANCH - GS =====================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as linhas considerando o método de Gauss-Seidel.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1B/result_branch_GS.png}
+    \end{center}
+    %\caption{}
+    \label{fig:result_branch_GS}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+\subsubsection{item C - Desacoplado Rápido} 
+
+% ================== DIAGRAMA C - DR =====================
+\begin{figure}[H]
+    \centering
+     \caption{Diagrama do sistema para a aplicação do método de Desacoplado Rápido.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1C/diagrama_DR.PNG}
+    \end{center}
+    %\caption{}
+    \label{fig:diagrama_DR}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+% ================== RESULT BUS - DR =====================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as barras considerando o método Desacoplado Rápido.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1C/result_bus_DR.PNG}
+    \end{center}
+    %\caption{}
+    \label{fig:result_bus_DR}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+% ================== RESULT BRANCH - DR =====================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as linhas considerando o método Desacoplado Rápido.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1C/result_branch_DR.png}
+    \end{center}
+    %\caption{}
+    \label{fig:result_branch_DR}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+\subsubsection{item D - Linear AC/DC} 
+
+% ================== DIAGRAMA D - AC =====================
+\begin{figure}[H]
+    \centering
+    \caption{Diagrama do sistema para a aplicação do método Linear AC.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1D/diagrama_AC.PNG}
+    \end{center}
+    %\caption{}
+    \label{fig:diagrama_AC}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+
+% ================== RESULT BUS - AC =====================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as barras considerando o método Linear AC.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1D/result_bus_AC.PNG}
+    \end{center}
+    %\caption{}
+    \label{fig:result_bus_AC} 
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+% ================== RESULT BRANCH - AC =====================
+\begin{figure}[H]
+    \centering
+     \caption{Apresentação da Tabela de resultados para as linhas considerando o método Linear AC.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1D/result_branch_AC.png}
+    \end{center}
+    %\caption{}
+    \label{fig:result_branch_AC}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+% ================== DIAGRAMA D - DC =====================
+\begin{figure}[H]
+    \centering
+    \caption{Diagrama do sistema para a aplicação do método de Linear DC.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1D/diagrama_DC.PNG}
+    \end{center}
+    %\caption{}
+    \label{fig:diagrama_DC}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+
+% ================== RESULT BUS - DC =====================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as barras considerando o método de Linear DC.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1D/result_bus_DC.PNG}
+    \end{center}
+    %\caption{}
+    \label{fig:result_bus_DC}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+% ================== RESULT BRANCH - DC =====================
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da Tabela de resultados para as barras considerando o método Linear DC.}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Q1D/result_branch_DC.png}
+    \end{center}%\caption{}
+    \label{fig:result_branch_DC}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+\subsubsection{Análise Comparativa}
+
+Para realizar a análise comparativa consideramos o mesmo código de cores apresentado no início da solução da questão acrescido da cor azul:
+
+\begin{itemize}
+    \item Azul: É o valor de referência, indicado na maioria das vezes na coluna com os dados do método de Newton-Raphson.
+    \item Verde: Estado normal e estável, ou seja, valores muito próximo aos dados de referência.
+    \item Amarelo: Sinaliza a necessidade de atenção, uma vez que apresenta um valor de distância considerável em relação ao valor base.
+    \item Laranja: Indica um sinal de alerta; apresenta um valor de distância significativamente maior em relação ao valor de referência.
+    \item Vermelho: Denota uma condição crítica, caracterizada por uma distância substancial do valor de referência.
+\end{itemize}
+
+Consideramos as seguintes siglas para cada método:
+
+\begin{itemize}
+    \item NR: Newton Raphson
+    \item GS: Gauss-Seidel
+    \item DR: Desacoplado rápido
+    \item AC: Linear AC
+    \item DC: Linear DC
+    \item AL: Active Losses(%)
+    \item ACf:Active current "from"
+    \item AP: Active Power "from"
+    \item RP: Reactive Power "from"
+\end{itemize}
+\newpage
+\begin{itemize}
+
+    \item \textbf{Análise comparativa das tensões nas barras}
+
+Para essa análise, vamos considerar os limites de tensão estabelecidos em cada barra, sendo que o valor mínimo foi 0,95 e o valor máximo foi 1,05.
+
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.2} % Aumentar o espaço entre as linhas
+\setlength{\tabcolsep}{9pt} % Reduzir o espaço entre as colunas
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+      & NR & GS & DR & AC & DC \\ \midrule
+Bus 1 & \textcolor{blue}{1.040} & \textcolor{green}{1.040} & \textcolor{green}{1.040} & \textcolor{green}{1.040} & \textcolor{green}{1.040} \\
+Bus 4 & \textcolor{blue}{0.996} & \textcolor{green}{0.996} & \textcolor{green}{0.996} & \textcolor{green}{1.033} & \textcolor{green}{1.000} \\
+Bus 6 & \textcolor{blue}{0.966} & \textcolor{green}{0.966} & \textcolor{green}{0.966} & \textcolor{green}{1.057} & \textcolor{red}{0.000} \\
+Bus 5 & \textcolor{blue}{0.951} & \textcolor{green}{0.951} & \textcolor{green}{0.951} & \textcolor{red}{0.000} & \textcolor{red}{0.000} \\
+Bus 9 & \textcolor{blue}{1.004} & \textcolor{green}{1.004} & \textcolor{green}{1.004} & \textcolor{red}{0.000} & \textcolor{green}{1.000} \\
+Bus 8 & \textcolor{blue}{0.979} & \textcolor{green}{0.979} & \textcolor{green}{0.979} & \textcolor{green}{1.037} & \textcolor{green}{1.000} \\
+Bus 3 & \textcolor{blue}{1.025} & \textcolor{green}{1.025} & \textcolor{green}{1.025} & \textcolor{green}{1.025} & \textcolor{red}{0.000} \\
+Bus 7 & \textcolor{blue}{0.998} & \textcolor{green}{0.998} & \textcolor{green}{0.998} & \textcolor{green}{1.019} & \textcolor{red}{0.000} \\
+Bus 2 & \textcolor{blue}{1.025} & \textcolor{green}{1.025} & \textcolor{green}{1.025} & \textcolor{green}{1.025} & \textcolor{green}{1.025} \\ \bottomrule
+\end{tabular}
+\caption{Tabela de Módulos de Tensão}
+\label{tab:voltage_modules}
+\end{table}
+
+Para a análise das tensões, notamos que os valores obtidos pelos métodos NR, GS e DR foram idênticos, enquanto os valores para AC e DC apresentaram alguns resultados fora da faixa ou iguais a zero.
+
+
+
+\newpage
+    \item \textbf{Análise comparativa da potência ativa em cada barra}
+
+Para a análise comparativa da potência ativa em cada barra, foram considerados os valores de referência destacados em azul. Também foi realizada uma análise gráfica, a partir do gráfico de barras, e notamos novamente que os valores para os métodos AC e DC divergiram em várias barras dos valores de referência.
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.1} % Ajustar o espaço entre as linhas
+\setlength{\tabcolsep}{5pt} % Reduzir o espaço entre as colunas
+\begin{tabular}{@{}lccccc@{}}
+      & NR & GS & DR & AC & DC \\
+\hline
+Bus 1 & \textcolor{blue}{72.34} & \textcolor{green}{72.34} & \textcolor{green}{72.34} & \textcolor{green}{71.95} & \textcolor{green}{69.66} \\
+Bus 4 & \textcolor{blue}{0.00}  & \textcolor{green}{0.00}  & \textcolor{green}{0.00}  & \textcolor{red}{95.76} & \textcolor{red}{261.08} \\
+Bus 6 & \textcolor{blue}{-90.00} & \textcolor{green}{-90.00} & \textcolor{green}{-90.00} & \textcolor{red}{121.26} & \textcolor{red}{0.00} \\
+Bus 5 & \textcolor{blue}{-125.00} & \textcolor{green}{-125.00} & \textcolor{green}{-125.00} & \textcolor{red}{0.00} & \textcolor{red}{0.00} \\
+Bus 9 & \textcolor{blue}{0.00}  & \textcolor{green}{0.00}  & \textcolor{green}{0.00}  & \textcolor{green}{0.00} & \textcolor{red}{151.87} \\
+Bus 8 & \textcolor{blue}{-100.00} & \textcolor{green}{-100.00} & \textcolor{green}{-100.00} & \textcolor{red}{50.68} & \textcolor{red}{138.11} \\
+Bus 3 & \textcolor{blue}{85.00} & \textcolor{green}{85.00} & \textcolor{green}{85.00} & \textcolor{red}{0.00} & \textcolor{red}{0.00} \\
+Bus 7 & \textcolor{blue}{0.00}  & \textcolor{green}{0.00}  & \textcolor{green}{0.00} & \textcolor{red}{27.47} & \textcolor{green}{0.00} \\
+Bus 2 & \textcolor{blue}{163.00} & \textcolor{green}{163.00} & \textcolor{green}{163.00} & \textcolor{green}{169.98} & \textcolor{red}{0.00} 
+\end{tabular}
+\caption{Tabela de Módulos das potências Ativas para cada método númerico}
+\label{tab:voltage_modules}
+\end{table}
+
+
+\begin{figure}[H]
+    \centering
+    \caption{Gráficos comparativos do comportamento da potência ativa na aplicação de cada método númerico com base no método de Newton Raphson}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_active_power.png}
+    \end{center}
+    \label{fig:analise_active_power}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+    \item \textbf{Análise comparativa da potência reativa em cada barra}
+
+Para a análise comparativa da potência reativa em cada barra, foram considerados os valores de referência destacados em azul. Também foi realizada uma análise gráfica, a partir do gráfico de barras, e notamos valores de potência reativa bastante elevados para os métodos AC e DC em várias barras em relação aos valores de referência.
+
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.1} % Ajustar o espaço entre as linhas
+\setlength{\tabcolsep}{5pt} % Reduzir o espaço entre as colunas
+\begin{tabular}{@{}lccccc@{}}
+      & NR & GS & DR & AC & DC \\
+\hline
+Bus 1 & \textcolor{blue}{81.18}  & \textcolor{green}{81.18}  & \textcolor{green}{81.18}  & \textcolor{red}{14.23}  & \textcolor{red}{73.57} \\
+Bus 4 & \textcolor{blue}{0.00}   & \textcolor{green}{0.00}   & \textcolor{green}{0.00}   & \textcolor{red}{1196.34}  & \textcolor{red}{2143.38} \\
+Bus 6 & \textcolor{blue}{-30.00} & \textcolor{green}{-30.00} & \textcolor{green}{-30.00} & \textcolor{red}{655.28}   & \textcolor{red}{0.00} \\
+Bus 5 & \textcolor{blue}{-50.00} & \textcolor{green}{-50.00} & \textcolor{green}{-50.00} & \textcolor{red}{0.00}    & \textcolor{red}{0.00} \\
+Bus 9 & \textcolor{blue}{0.00}    & \textcolor{green}{0.00}   & \textcolor{green}{0.00}   & \textcolor{green}{0.00}  & \textcolor{red}{2262.80} \\
+Bus 8 & \textcolor{blue}{-35.00} & \textcolor{green}{-35.00} & \textcolor{green}{-35.00} & \textcolor{red}{1090.60} & \textcolor{red}{1372.87} \\
+Bus 3 & \textcolor{blue}{38.64}  & \textcolor{green}{38.64}  & \textcolor{green}{38.64}  & \textcolor{red}{1794.14} & \textcolor{red}{0.00} \\
+Bus 7 & \textcolor{blue}{0.00}   & \textcolor{green}{0.00}   & \textcolor{green}{-0.00}  & \textcolor{red}{585.23}  & \textcolor{green}{0.00} \\
+Bus 2 & \textcolor{blue}{53.47}  & \textcolor{green}{53.47}  & \textcolor{green}{53.47}  & \textcolor{red}{19.36}  & \textcolor{red}{1682.08} 
+\end{tabular}
+\caption{Tabela de Módulos das potências Reativas para cada método numérico}
+\label{tab:reactive_power_modules}
+\end{table}
+
+
+\begin{figure}[H]
+    \centering
+    \caption{Gráficos comparativos do comportamento da potência reativa na aplicação de cada método númerico com base no método de Newton Raphson}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_reative_power.png}
+    \end{center}
+    \label{fig:analise_active_power}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+    \item \textbf{Análise comparativa da Branch Loading em cada trecho do sistema}
+    
+Para analisar esses dados do sistema, foi considerada como referência a potência de 100 MVA e o código de cores apresentado no início da seção. Assim, as potências que estão abaixo desse valor são indicadas em verde, e assim por diante.
+
+Sabendo que:\\
+
+\textbf{Definição de Branch Loading:} Refere-se à carga ou utilização da linha de transmissão em relação à sua capacidade total. Um maior valor de branch loading indica que a linha está mais próxima de sua capacidade máxima, o que pode levar a riscos de sobrecarga. Para análise vamos considerar o valor de referência igual a 100 [MVA].
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.0} % Reduzir o espaço entre as linhas
+\setlength{\tabcolsep}{3pt} % Reduzir ainda mais o espaço entre as colunas
+\small % Diminuir o tamanho da fonte
+\begin{tabular}{@{}lccccc@{}}
+              & Branch Loading (NR) & Branch Loading (GS) & Branch Loading (DR) & Branch Loading (AC) & Branch Loading (DC) \\ 
+\hline
+Line 4-6      & \textcolor{green}{40.78} & \textcolor{green}{40.78} & \textcolor{green}{40.78} & \textcolor{green}{37.47} & \textcolor{green}{41.95} \\
+Line 5-4      & \textcolor{green}{60.76} & \textcolor{green}{60.76} & \textcolor{green}{60.76} & \textcolor{green}{0.00} & \textcolor{green}{45.40} \\
+Line 9-8      & \textcolor{green}{32.93} & \textcolor{green}{32.93} & \textcolor{green}{32.93} & \textcolor{green}{0.00} & \textcolor{green}{23.97} \\
+Line 7-8      & \textcolor{green}{78.54} & \textcolor{yellow}{78.54} & \textcolor{yellow}{78.54} & \textcolor{yellow}{81.19} & \textcolor{green}{19.93} \\
+Line 7-5      & \textcolor{orange}{88.39} & \textcolor{orange}{88.39} & \textcolor{orange}{88.39} & \textcolor{red}{632.33} & \textcolor{green}{0.00} \\
+Line 6-9      & \textcolor{green}{59.49} & \textcolor{green}{59.49} & \textcolor{green}{59.49} & \textcolor{red}{639.98} & \textcolor{green}{22.65} \\
+Transformer 1 & \textcolor{red}{104.11} & \textcolor{red}{104.11} & \textcolor{red}{104.11} & \textcolor{yellow}{72.84} & \textcolor{green}{67.00} \\
+Transformer 2 & \textcolor{orange}{91.47} & \textcolor{orange}{91.47} & \textcolor{orange}{91.47} & \textcolor{green}{0.00} & \textcolor{green}{65.72} \\
+Transformer 3 & \textcolor{red}{171.54} & \textcolor{red}{171.54} & \textcolor{red}{171.54} & \textcolor{red}{171.07} & \textcolor{red}{273.55} 
+\end{tabular}
+\caption{Tabela de Carga das Linhas}
+\label{tab:branch_loading}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do valor carga ou utilização do trecho em cada parte do sistema}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_branch_loading.png}
+    \end{center}
+    \label{fig:analise_branch_loading}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+A partir das visualizações obtidas, é possível verificar trechos do sistema que estão com sobrecarga. Isso também é perceptível e serve como comparação com as imagens apresentadas do diagrama do sistema quando cada método é aplicado.
+
+
+\newpage
+    \item \textbf{Análise comparativa da Active Losses em cada trecho do sistema}
+
+Aqui, foram considerados como referência os valores obtidos pelo método de Newton-Raphson. Podemos perceber que esse método apresenta valores de perdas baixos, enquanto os métodos AC e DC demonstram valores de perdas muito altos.
+
+\textbf{Definição de Active Losses (\%):} Esta informação representa as perdas ativas na linha de transmissão como uma porcentagem da potência total transmitida. Essas perdas, quando aplicado cada método numérico, são decorrentes das simulações da resistência elétrica dos condutores, resultando em dissipação de energia na forma de calor. Perdas ativas elevadas podem indicar baixa eficiência da linha. Para este estudo de análise e comparação, vamos considerar como referência os valores obtidos pelo método de Newton-Raphson. Valores muito elevados serão representados na tabela como 999, para facilitar a representação gráfica.
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.1} % Ajustar o espaço entre as linhas
+\setlength{\tabcolsep}{0.1pt} % Reduzir o espaço entre as colunas
+\begin{tabular}{@{}lccccc@{}}
+              & \textcolor{blue}{PI: AL(NR)} & PI: AL (GS) & PI: AL(DR) & PI: AL(AC) & PI: AL(DC) \\
+\hline
+Line 4-6      & \textcolor{blue}{0.92} & \textcolor{green}{0.92} & \textcolor{green}{0.92} & \textcolor{green}{1.01} & \textcolor{red}{0} \\
+Line 5-4      & \textcolor{blue}{1.00} & \textcolor{green}{1.00} & \textcolor{green}{1.00} & \textcolor{red}{999} & \textcolor{red}{0} \\
+Line 9-8      & \textcolor{blue}{0.53} & \textcolor{green}{0.53} & \textcolor{green}{0.53} & \textcolor{red}{999} & \textcolor{red}{0} \\
+Line 7-8      & \textcolor{blue}{0.69} & \textcolor{green}{0.69} & \textcolor{green}{0.69} & \textcolor{green}{0.73} & \textcolor{red}{0} \\
+Line 7-5      & \textcolor{blue}{2.90} & \textcolor{green}{2.90} & \textcolor{green}{2.90} & \textcolor{red}{100} & \textcolor{red}{0} \\
+Line 6-9      & \textcolor{blue}{2.49} & \textcolor{green}{2.49} & \textcolor{green}{2.49} & \textcolor{red}{100} & \textcolor{red}{0} \\
+Transformer 1 & \textcolor{blue}{0}    & \textcolor{blue}{0}     & \textcolor{blue}{0}     & \textcolor{blue}{0}    & \textcolor{blue}{0} \\
+Transformer 2 & \textcolor{blue}{0}    & \textcolor{blue}{0}     & \textcolor{blue}{0}     & \textcolor{red}{999}   & \textcolor{blue}{0} \\
+Transformer 3 & \textcolor{blue}{0}    & \textcolor{blue}{0}     & \textcolor{blue}{0}     & \textcolor{blue}{0}    & \textcolor{blue}{0} 
+\end{tabular}
+\caption{PI: Active Losses}
+\label{tab:active_losses}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \caption{Análise da perda de potência ativa na aplicação de cada método númerico em cada trecho do sistema}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_active_losses.png}
+    \end{center}
+    \label{fig:analise_active_losses}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+ \item \textbf{Análise comparativa da Active current em cada trecho do sistema}
+
+\newpage
+ \item \textbf{Análise comparativa da Active current em cada trecho do sistema}
+
+\textbf{Definição da Active current:} Refere-se à corrente ativa que flui de uma bus from (uma barra de origem) para uma bus to. Essa corrente é a componente real da corrente que transmite a potência ativa através da linha. Novamente aqui vamos utilizar como base de análise comparativa os valores obtidos no métodos de Newton Raphson
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.1} % Ajustar o espaço entre as linhas
+\setlength{\tabcolsep}{1pt} % Reduzir o espaço entre as colunas
+\begin{tabular}{@{}lccccc@{}}
+              & f: ACf (NR) & f: ACf (GS) & f: ACf (DR) & f: ACf (AC) & f: ACf (DC) \\
+\hline
+Line 4-6      & \textcolor{blue}{0.30}  & \textcolor{green}{0.30}  & \textcolor{red}{-0.28}  & \textcolor{green}{0.22}  & \textcolor{red}{-0.42}  \\
+Line 5-4      & \textcolor{blue}{-0.30}  & \textcolor{blue}{-0.30}  & \textcolor{red}{0.50}  & \textcolor{red}{-0.95}  & \textcolor{red}{99}  \\
+Line 9-8      & \textcolor{blue}{0.25}  & \textcolor{green}{0.25}  & \textcolor{red}{-0.21}  & \textcolor{red}{-1.36}  & \textcolor{green}{0.24}  \\
+Line 7-8      & \textcolor{blue}{0.78}  & \textcolor{green}{0.78}  & \textcolor{red}{-0.13}  & \textcolor{green}{0.70}  & \textcolor{red}{-99}  \\
+Line 7-5      & \textcolor{blue}{0.87}  & \textcolor{green}{0.87}  & \textcolor{red}{-0.12}  & \textcolor{red}{1.63}  & \textcolor{red}{0}  \\
+Line 6-9      & \textcolor{blue}{-0.61}  & \textcolor{green}{-0.61}  & \textcolor{green}{0.09}  & \textcolor{red}{0.99}  & \textcolor{red}{-99}  \\
+Transformer 1 & \textcolor{blue}{-0.70}  & \textcolor{green}{-0.70}  & \textcolor{green}{0.78}  & \textcolor{red}{-0.69}  & \textcolor{red}{-0.67}  \\
+Transformer 2 & \textcolor{blue}{-0.86}  & \textcolor{green}{-0.86}  & \textcolor{red}{0.31}  & \textcolor{red}{1.53}  & \textcolor{red}{0.66}  \\
+Transformer 3 & \textcolor{blue}{1.65}  & \textcolor{blue}{1.65}  & \textcolor{red}{-0.25}  & \textcolor{green}{1.67}  & \textcolor{red}{2.63}  
+\end{tabular}
+\caption{f: Active Current}
+\label{tab:active_current}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do comparativo gráfico do valor de 'Active current' em cada método considerando como refência o método de Newton Raphson}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_active_current_1.png}
+    \end{center}
+    \label{fig:analise_active_current_1}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do comparativo gráfico do valor de 'Active current' em cada método considerando como refência o método de Newton Raphson (Segundo Método de Visualização dos resultados)}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_active_current_2.png}
+    \end{center}
+    \label{fig:analise_active_current_2}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\newpage
+ \item \textbf{Análise comparativa da Active power em cada trecho do sistema}
+
+Aqui, temos valores diferentes obtidos para os métodos AC e DC, juntamente com a adição da análise gráfica utilizando um heatmap, um dos gráficos da biblioteca Seaborn do Python. Com ele, é possível identificar zonas ou trechos com valores altos de potência ativa; por exemplo, o valor para o método DC no transformador 3.
+
+\textbf{Definição da Active Power:} Representa a potência ativa que está sendo transmitida a partir de um ponto específico da linha (from) para outro ponto (to).
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.0} % Reduzir o espaço entre as linhas
+\setlength{\tabcolsep}{3pt} % Reduzir o espaço entre as colunas
+\small % Diminuir o tamanho da fonte
+\begin{tabular}{@{}lccccc@{}}
+              & Pf: AP (NR) & Pf: AP (GS) & Pf: AP(DR) & Pf: AP (AC) & Pf: AP(DC) \\ 
+\hline
+Line 4-6      & \textcolor{blue}{31.02}  & \textcolor{green}{31.02}  & \textcolor{green}{31.02}  & \textcolor{green}{22.07}  & \textcolor{red}{-41.94} \\
+Line 5-4      & \textcolor{blue}{-40.90} & \textcolor{green}{-40.90} & \textcolor{green}{-40.90} & \textcolor{red}{0.00}     & \textcolor{green}{45.40} \\
+Line 9-8      & \textcolor{blue}{24.26}  & \textcolor{green}{24.26}  & \textcolor{green}{24.26}  & \textcolor{red}{0.00}     & \textcolor{green}{23.97} \\
+Line 7-8      & \textcolor{blue}{76.39}  & \textcolor{green}{76.39}  & \textcolor{green}{76.39}  & \textcolor{green}{74.17}  & \textcolor{red}{-19.94} \\
+Line 7-5      & \textcolor{blue}{86.60}  & \textcolor{green}{86.60}  & \textcolor{green}{86.60}  & \textcolor{green}{123.27} & \textcolor{red}{0.00} \\
+Line 6-9      & \textcolor{blue}{-59.26} & \textcolor{green}{-59.26} & \textcolor{green}{-59.26} & \textcolor{red}{143.10}   & \textcolor{red}{-22.65} \\
+Transformer 1 & \textcolor{blue}{-72.34} & \textcolor{green}{-72.34} & \textcolor{green}{-72.34} & \textcolor{green}{-71.95} & \textcolor{green}{-67.00} \\
+Transformer 2 & \textcolor{blue}{-85.00} & \textcolor{green}{-85.00} & \textcolor{green}{-85.00} & \textcolor{red}{0.00}     & \textcolor{green}{65.72} \\
+Transformer 3 & \textcolor{blue}{163.00} & \textcolor{green}{163.00} & \textcolor{green}{163.00} & \textcolor{green}{169.98} & \textcolor{red}{273.56} 
+\end{tabular}
+\caption{Tabela de Potência Ativa das Linhas}
+\label{tab:active_power}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do comparativo gráfico do valor de 'Active power' em cada método considerando como refência o método de Newton Raphson}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_active_power_pf.png}
+    \end{center}
+    \label{fig:analise_active_power_pf}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do comparativo gráfico do valor de 'Active power' em cada método considerando como refência o método de Newton Raphson(Segundo método de visualização utilizando o gráfico de calor (Headmap))}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_active_power_headmap_pf.png}
+    \end{center}
+    \label{fig:analise_active_power_qf}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+
+\newpage
+ \item \textbf{Análise comparativa da Reactive power em cada trecho do sistema}
+
+Podemos destacar aqui é novamente um comportamento diferente para os métodos AC e DC
+
+\textbf{Definição da Reative Power:} Representa a potência reativa, ou seja,  a potência necessária para o funcionamento de equipamentos indutivos e capacitivos do sistema, que está sendo transmitida a partir de um ponto específico da linha (from) para outro ponto (to).
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.0} % Reduzir o espaço entre as linhas
+\setlength{\tabcolsep}{3pt} % Reduzir o espaço entre as colunas
+\small % Diminuir o tamanho da fonte
+\begin{tabular}{@{}lccccc@{}}
+              & Qf: RP (NR) & Qf: RP (GS) & Qf: RP (DR) & Qf: RP (AC) & Qf: RP (DC) \\ 
+\hline
+Line 4-6      & \textcolor{blue}{26.46}  & \textcolor{green}{26.46}  & \textcolor{green}{26.46}  & \textcolor{red}{-30.29}  & \textcolor{red}{0.00}     \\
+Line 5-4      & \textcolor{blue}{-44.94} & \textcolor{green}{-44.94} & \textcolor{green}{-44.94} & \textcolor{red}{0.00}     & \textcolor{red}{0.00}     \\
+Line 9-8      & \textcolor{blue}{22.27}  & \textcolor{green}{22.27}  & \textcolor{green}{22.27}  & \textcolor{red}{0.00}     & \textcolor{red}{0.00}     \\
+Line 7-8      & \textcolor{blue}{18.28}  & \textcolor{green}{18.28}  & \textcolor{green}{18.28}  & \textcolor{red}{-33.01}  & \textcolor{red}{0.00}     \\
+Line 7-5      & \textcolor{blue}{17.70}  & \textcolor{green}{17.70}  & \textcolor{green}{17.70}  & \textcolor{red}{620.20} & \textcolor{red}{0.00}     \\
+Line 6-9      & \textcolor{blue}{-5.07}  & \textcolor{green}{-5.07}  & \textcolor{green}{-5.07}  & \textcolor{red}{623.79} & \textcolor{red}{0.00}     \\
+Transformer 1 & \textcolor{blue}{-74.88} & \textcolor{green}{-74.88} & \textcolor{green}{-74.88} & \textcolor{red}{-11.36}  & \textcolor{red}{0.00}     \\
+Transformer 2 & \textcolor{blue}{-33.78} & \textcolor{green}{-33.78} & \textcolor{green}{-33.78} & \textcolor{red}{0.00}     & \textcolor{red}{0.00}     \\
+Transformer 3 & \textcolor{blue}{53.47}  & \textcolor{green}{53.47}  & \textcolor{green}{53.47}  & \textcolor{red}{19.36}  & \textcolor{red}{0.00}     
+\end{tabular}
+\caption{Tabela de Potência Reativa das Linhas}
+\label{tab:reactive_power}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do comparativo gráfico do valor de 'Reactive power' em cada método considerando como refência o método de Newton Raphson}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_reactive_power_qf.png}
+    \end{center}
+    \label{fig:analise_active_power_pf}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do comparativo gráfico do valor de 'Reactive power' em cada método considerando como refência o método de Newton Raphson(Segundo método de visualização utilizando o gráfico de calor (Headmap))}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1E/analise_reactive_power_headmap_qf.png}
+    \end{center}
+    \label{fig:analise_active_power_qf}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\end{itemize}
+\newpage
+\subsection{Solução - Questão 2}
+
+Como os limites estabelecidos no enunciado da questão já foram adicionados em cada barra do sistema, conforme mostrado nas configurações iniciais de construção do sistema, apresentados nas imagens da questão 1.
+
+Para a questão dois, o que foi modificado foi o aumento de todas as potências das cargas em um fator de 25 \%\\
+
+\textbf{Logo:} \\
+
+
+\textbf{Para a carga na barra 5:}
+
+$$P_{load-5} =  125 + (125 \cdot 0,25) \rightarrow P_{load-5} = 156,25 [MW]$$
+$$Q_{load-5} = 50 + (50 \cdot 0,25)     \rightarrow Q_{load-5} = 62,5  [MVAr]$$
+
+\textbf{Para a carga na barra 6:}
+
+$$P_{load-6} = 90 + (90 \cdot 0,25) \rightarrow   P_{load-6} = 112,5  [MW]$$
+$$Q_{load-6} = 30 + (30 \cdot 0,25) \rightarrow   Q_{load-6} = 37,5 [MVAr]$$
+
+\textbf{Para a carga na barra 8:}
+
+$$P_{load-8} = 100 + (100 \cdot 0,25) \rightarrow   P_{load-6} = 125  [MW]$$
+$$Q_{load-8} = 35 + (35 \cdot 0,25)   \rightarrow Q_{load-6} = 43,75 [MVAr]$$
+
+
+\subsubsection{Análise de Proposição de um Novo Transformador e uma Nova Linha}
+
+Essa subseção busca garantir uma primeira solução para normalizar a situação no sistema caso a simulação apresente alguma sobrecarga em algum trecho do sistema.
+
+Apresentamos iniciamente um imagem comparativa do sistema aplicado o método de Newton Rhapson sem o aumento de 25 \% nas cargas, para ter mais um recurso de comparação.
+
+A Fig.(\ref{fig:sist_up_power}) é o resultado do fluxo de carga no sistema com a potência de todas as cargas do sistemas aumentadas em 25 \% da sua carga, e a Fig.(\ref{fig:sist_up_power_correction}) busca garantir uma solução para o sistema levando em consideração explorar as melhores soluções para o sistema, visando atender requisitos de custo, viabilidade técnica e o pleno funcionamento do sistema. \\
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do sistema sem a potência das cargas aumentadas em 25\%}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q1A/diagrama_NR.PNG}
+    \end{center}
+    \label{fig:sist_without_up_power}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação do sistema com a potência das cargas aumentadas em 25\%}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q2/sist_1_up_power.PNG}  
+    \end{center}
+    \label{fig:sist_up_power}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Apresentação da correção realizada no sistema com a potência das cargas aumentadas em 25\%}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Q2/sist_1_up_power_correction.PNG}
+    \end{center}
+    \label{fig:sist_up_power_correction}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+Foi solicitado que aumentasse as cargas presentes no sistema com fator de 25\%, \textbf{ao realizar esse feito ocorreu as seguintes mudanças:}
+
+
+\begin{enumerate}
+
+\item As barras 5 e 6 ficaram com subtensão, ou seja, abaixo do limite de 0,95 pu. 
+
+\item Os transformadores 1 e 2 ficaram sobrecarregados, ou seja, existe excesso de potência ativa(W). 
+
+\item A linha  5-4 ficou também sobrecarregada, pois como ultrapassou o valor de potência ativa, então a corrente aumenta bastante e acaba excedendo o limite da linha e a linha 7-8 ficou com quase 100% de carregamento. 
+\end{enumerate}
+
+\textbf{Para mitigar os problemas, seguimos os seguintes passos:}
+\begin{enumerate}
+\item Adicionamos um transformador em paralelo com o trafo na barra 1 e também na barra 2, com as mesmas características dos trafos que já estavam no sistema. Tendo em vista que para colocar dois transformadores em paralelo é imprescindível que tenham a mesma relação de transformação(mesmas tensões), potências iguais ou proporcionais, dentre outros fatores. 
+\item Realizando esse feito, resolve-se o problema da subtensão, ou seja, todas as barras ficam dentro dos limites estabelecidos. Além disso, os transformadores não ficaram mais sobrecarregados.
+\item Mas não resolve ainda o problema das linhas que estão sobrecarregadas, portanto para mitigar esse problema foi colocado novas linhas idênticas em paralelo com as linhas já existentes. Pois realizando isso, a corrente irá se dividir igualmente e assim solucionando o problema. 
+\end{enumerate}
+
+Conclui-se que, ao aumentar as cargas do sistema em 25\%, surgiram desafios importantes relacionados à subtensão e sobrecarga tanto nos transformadores quanto nas linhas. A adição de transformadores em paralelo foi uma solução eficaz para corrigir as subtensões e eliminar as sobrecargas nos transformadores, restabelecendo as condições de operação nas barras. No entanto, a tensão na barra 1 ficou próxima do limite de 1,05 pu. Embora tenham sido realizados esforços para reduzir essa tensão, as alterações impactaram outras barras, levando à decisão de manter a configuração atual.
+
+\justify
+Além disso, foram feitas tentativas de instalação de bancos de capacitores para melhorar a situação. No entanto, essas intervenções resultaram em um aumento ligeiro nas tensões e apenas uma diminuição modesta no carregamento, o que não justificou a sua implementação. Portanto, optamos por manter a configuração atual dos transformadores em paralelo e a instalação de linhas adicionais para equilibrar o fluxo de corrente e a potência ativa excessiva. Com essas ações, foi possível mitigar os problemas e garantir que o sistema funcione dentro dos parâmetros de segurança e eficiência.
+
+\newpage
+\subsubsection{Análise de Proposição para Adição de um Gerador}
+
+Uma nova abordagem realizada para o problema de aumento da carga no sistema foi adicionar um novo gerador, permitindo um aumento da geração do sistema, ao passo que o fluxo de carga é decomposto em partes iguais.
+
+O gerador foi acrescentado juntamente a uma barra e um transformador, conectando este elemento na barra 6 no qual existe uma carga já presente.
+
+Os novos elementos adicionados foram:
+
+\begin{enumerate}[$\bullet$]
+    \item Bus 10 $\rightarrow$ $V_{nom}$ = 13,8 [kV], $Vm_0$ = 1,0 [pu];
+    \item Transformer 4 $\rightarrow$ R = 0,01 [pu], X = 0,05 [pu];
+    \item Generator 4 $\rightarrow$ P = 85,0 [MW], PF = 0,8.
+\end{enumerate}
+
+Realizando uma avaliação para o método de Newton-Raphson por meio da solução do fluxo de potência do GridCal. Sendo assim, tem-se:
+
+\begin{enumerate}
+
+    %% -----------  NEWTON RAPHSON ------------ %%
+    \item \textbf{Método de Newton-Raphson:}
+
+    \begin{figure}[H]
+        \centering
+        \caption{Diagrama do Sistema após a Solução com Newton-Raphson para um excedente de carga.}
+        \begin{center}
+            \includegraphics[scale=0.8]{imagens/desenvolvimento/Ítalo/Diagramas/Gerador adiconado - NR.png}
+        \end{center}
+        \label{fig:gen-correction-NR}
+        {\footnotesize Fonte: O Próprio Autor.}
+    \end{figure}
+    \newpage
+    
+    \begin{figure}[H]
+        \centering
+        \caption{Resultados das Barras pela Solução de Newton-Raphson para um excedente de carga.}
+        \begin{center}
+            \includegraphics[width=0.8\textwidth]{imagens/desenvolvimento/Ítalo/Resultados Métodos/Valores Barras - NR.png}
+        \end{center}
+        \label{fig:Bus-NR}
+        {\footnotesize Fonte: O Próprio Autor.}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \centering
+        \caption{Resultados dos Ramos pela Solução de Newton-Raphson para um excedente de carga.}
+        \begin{center}
+            \includegraphics[width=0.9\textwidth]{imagens/desenvolvimento/Ítalo/Resultados Métodos/Valores Branches-1 - NR.png}
+        \end{center}
+        \label{fig:Branches1-NR}
+        {\footnotesize Fonte: O Próprio Autor.}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \centering
+        \caption{Resultado das Barras pela Solução de Newton-Raphson para um excedente de carga.}
+        \begin{center}
+            \includegraphics[width=0.7\textwidth]{imagens/desenvolvimento/Ítalo/Resultados Métodos/Valores Branches-2 - NR.png}
+        \end{center}
+        \label{fig:Branches2-NR}
+        {\footnotesize Fonte: O Próprio Autor.}
+    \end{figure}
+
+\end{enumerate}
+
+Após realizar a devida mudança no sistema e executar o fluxo de carga, observamos melhorias significativas, Fig.(\ref{fig:gen-correction-NR}), Fig.(\ref{fig:Bus-NR}), Fig.(\ref{fig:Branches1-NR}) e Fig.(\ref{fig:Branches2-NR}), dentre elas:
+
+\begin{enumerate}
+    \item Não existem mais subtensões em nenhuma das barras.
+    \item O carregamento nas linhas e nos transformadores diminuiu consideravelmente, por exemplo:
+    \begin{align*}
+        & \text{Transformador 1:} \quad 51,35\% \\
+        & \text{Transformador 2:} \quad 48,36\%
+    \end{align*}
+\end{enumerate}
+
+\begin{enumerate}[$\bullet$]
+    \item Não existem mais subtensões em nenhuma das barras.
+    \item O carregamento nas linhas e nos transformados diminuíram consideravelmente, por exemplo, os transformadores 1 e 2 reduziram seu carregamento em 51,35\% e 48,36\% respectivamente.
+\end{enumerate}
+
+Podemos perceber, também, que essa opção resolve os problemas que o acréscimo de carga causou no sistema. Mas geradores são mais problemáticos de acrescentar à rede devido ao seu elevado custo operacional, já que consomem combustível continuamente e requerem manutenção frequente.
+
+Além disso, sua sincronização com a rede em termos de frequência e tensão é complexa, o que pode afetar a estabilidade e qualidade da energia. Eles também exigem infraestrutura adicional, como sistemas de controle, espaço físico e armazenamento de combustível.
+
+Por fim, geradores a combustíveis fósseis emitem poluentes, gerando impacto ambiental e dificuldades com regulamentações. Essas razões tornam os geradores uma solução menos viável em comparação com transformadores ou novas linhas.
+
+\newpage
+\subsubsection{Análise de Proposição para Adição de um Banco de Capacitores}
+
+Por fim, foi feito um estudo utilizando banco de capacitores no lugar de novas linhas. Os resultados são parecidos em relação à primeira análise, apenas com pequenas diferenças, só que dentro dos limites desejados. Os bancos de capacitores foram colocados em barras que têm carga e os valores da potência reativa igual ao da carga referente a barra a qual está inserido.
+
+Após realizar esse procedimento, foi resolvido o problema de subtensão e de carregamento das linhas, mas como seu impacto sobre o carregamento de transformadores é limitado, especialmente em sistemas onde a sobrecarga é causada por alta demanda de potência ativa, que é o caso do sistema em questão.
+
+Com isso, foi necessário colocar transformadores em paralelo com os trafos 1 e 2, pois esses que estão com problema de sobrecarga. 
+
+Como o problema do sistema foi solucionado e os valores ficaram dentro dos limites determinados, podemos considerar uma resolução viável. Além disso, sabe-se que os bancos de capacitores são mais baratos porque oferecem uma solução direta para melhorar as condições de subtensão por meio da compensação reativa, sem a necessidade de grandes investimentos em infraestrutura física.
+
+Eles requerem menos materiais, menor mão de obra e podem ser instalados com rapidez em comparação com as linhas de transmissão, que envolvem custos elevados e processos demorados.
+
+\begin{figure}[H]
+    \centering
+    \caption{Diagrama do Sistema com um Banco Capacitivo com um excedente de carga.}
+    \begin{center}
+        \includegraphics[scale = 0.7]{imagens/desenvolvimento/Ítalo/Resultados Métodos/diagrama banco capacitor.png}
+    \end{center}
+    \label{fig:load-capacitivo}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultado do Carregamento pela Solução de Newton-Raphson para um excedente de carga.}
+    \begin{center}
+        \includegraphics[scale = 0.8]{imagens/desenvolvimento/Ítalo/Resultados Métodos/carregamento.png}
+    \end{center}
+    \label{fig:load-capacitivo}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultado do Ângulo pela Solução de Newton-Raphson para um excedente de carga.}
+    \begin{center}
+        \includegraphics[scale=0.9]{imagens/desenvolvimento/Ítalo/Resultados Métodos/angulo.png}
+    \end{center}
+    \label{fig:angle-capacitivo}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultado da Corrente Ativa pela Solução de Newton-Raphson para um excedente de carga.}
+    \begin{center}
+        \includegraphics[scale=0.8]{imagens/desenvolvimento/Ítalo/Resultados Métodos/corrente ativa.png}
+    \end{center}
+    \label{fig:real_current-capacitivo}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultado da Corrente Reativa pela Solução de Newton-Raphson para um excedente de carga.}
+    \begin{center}
+        \includegraphics[scale=0.8]{imagens/desenvolvimento/Ítalo/Resultados Métodos/corrente reativa.png}
+    \end{center}
+    \label{fig:reactive_current-capacitivo}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultado das Perdas pela Solução de Newton-Raphson para um excedente de carga.}
+    \begin{center}
+        \includegraphics[scale=0.8]{imagens/desenvolvimento/Ítalo/Resultados Métodos/losses.png}
+    \end{center}
+    \label{fig:loses-capacitivo}
+    {\footnotesize Fonte: O Próprio Autor.}
+\end{figure}

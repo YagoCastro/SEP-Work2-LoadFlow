@@ -1,0 +1,15 @@
+% Objetivos do Trabalho ASP-2 - Análise de SEP
+%
+\fancyhead[L]{UNIVERSIDADE FEDERAL DO CEARÁ}
+\fancyfoot[C]{\thepage}
+\renewcommand{\footrulewidth}{0.5pt}
+\pagestyle{fancy}
+%
+\flushleft{\section{Objetivos}}
+
+\begin{enumerate}[-]
+    \item Fazer uso do software GridCal.
+    \item Analisar e identificar problemas com relação ao fluxo de potência em um Sistema Elétrico de Potência por meio do GridCal.
+    \item Propor soluções para um problema de fluxo de potência.
+    \item Verificar entre as soluções propostas a que mais se adeque.
+\end{enumerate}

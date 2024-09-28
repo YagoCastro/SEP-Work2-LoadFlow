@@ -1,0 +1,87 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{anysize} 
+\usepackage{graphics}
+\graphicspath{ {./Image/} }
+\usepackage[brazil]{babel}
+\usepackage{float}
+\usepackage{makeidx}
+\usepackage{subfiles}
+\usepackage{hyperref}
+\usepackage{midpage}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{scalefnt}
+\usepackage[normalem]{ulem}
+\usepackage{array}
+\usepackage{fancyref}
+\usepackage{indentfirst}
+\usepackage{lmodern,babel,adjustbox,booktabs,multirow}
+\usepackage{breqn}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{geometry}
+\usepackage{gensymb}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{cleveref}
+\usepackage{amstext}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{ragged2e}
+
+% Maior controle de floats
+\usepackage{float}
+% Formatação precisa de tabelas
+\usepackage{makecell}
+% Indentação do primeiro parágrafo após uma seção e definição do tamanho da indentação
+\usepackage{indentfirst}
+\setlength\parindent{1.25cm}
+\setlength\parskip{1em plus 0.1em minus 0.2em}
+%% Teste de Novos Comandos Acima: 27/09/2024 %%
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\urlstyle{same}
+
+\marginsize{3cm}{2cm}{1cm}{2cm}
+\setlength{\parindent}{30ex}
+\fontfamily{crm}\selectfont
+
+\usepackage{fancyhdr}
+\fancyhf{}
+
+%\fancyhead[L]{\leftmark}
+%\fancyhead[L]{UNIVERSIDADE FEDERAL DO CEARÁ}
+
+%\fancyhead[L]{UNIVERSIDADE FEDERAL DO CEARÁ}
+%\fancyfoot[C]{\thepage}
+%\renewcommand{\footrulewidth}{0.5pt}
+%\pagestyle{fancy}
+
+\usepackage{lipsum}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{transparent}
+
+\usepackage{eso-pic}
+
+\AddToShipoutPicture{
+\put(0,0){\parbox[b][\paperheight]
+{\paperwidth}{%\vfill
+\centering
+\vfill}}}

@@ -1,0 +1,38 @@
+% Capa do Relatório do Trabalho ASP-2 - Análise de SEP
+%
+\begin{figure}
+    \begin{minipage}[!]{0.30\linewidth}
+    \hbox{\includegraphics[width=55px]{imagens/capa/ufc.png}}
+    \end{minipage}
+    \hspace{3cm}\begin{minipage}[!]{0.30\linewidth}
+    \center{\includegraphics[width=100px]{imagens/capa/ct sem borda.jpg}}
+    \end{minipage}
+    \hspace{2cm}\begin{minipage}[!]{0.35\linewidth}
+    \includegraphics[width=110px]{imagens/capa/dee.png}
+    \end{minipage}\newline\vspace{0.2cm}
+\end{figure}
+
+\center{UNIVERSIDADE FEDERAL DO CEARÁ}
+\center{CENTRO DE TECNOLOGIA}
+\center{\hspace{0.3cm}DEPARTAMENTO DE ENGENHARIA ELÉTRICA}
+\center{\hspace{1.5cm}} ANÁLISE DE SISTEMAS ELÉTRICOS DE POTÊNCIA\newline
+
+\vspace{2.2cm}
+\textbf{TRABALHO COMPUTACIONAL 2:\\FLUXO DE CARGA}\\
+\vspace{2.5cm}
+
+\begin{tabular}{lc}
+    Estudantes: & Ítalo Gomes de Souza  -  Matrícula: 494977\\
+    & Yago Castro dos Reis -  Matrícula: 494531 \\
+    & Juliana Tavares Gattermann -  Matrícula: 485062 
+    \vspace{0.5cm}
+\end{tabular}
+
+\begin{tabular}{c}
+    Prof.: Lucas Silveira Melo\\
+    Turma: 01 (Segunda-feira e Quarta-feira, 16h às 18h)\\
+\end{tabular}
+
+\vspace{5cm}
+\center{Fortaleza - CE}
+\center{\hspace{0.1cm}\today}
